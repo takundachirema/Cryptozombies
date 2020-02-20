@@ -1,4 +1,4 @@
-pragma solidity ^0.5.0;
+pragma solidity >=0.5.0;
 
 import "./ZombieFactory.sol";
 
@@ -38,9 +38,11 @@ contract ZombieFeeding is ZombieFactory {
       return (_zombie.readyTime <= now);
   }
 
-  function feedAndMultiply(uint _zombieId, uint _targetDna, string memory _species) internal onlyOwnerOf(_zombieId) {
+  //public for testing
+  function feedAndMultiply(uint _zombieId, uint _targetDna, string memory _species) public onlyOwnerOf(_zombieId) {
+  //function feedAndMultiply(uint _zombieId, uint _targetDna, string memory _species) private onlyOwnerOf(_zombieId) {
     Zombie storage myZombie = zombies[_zombieId];
-    require(_isReady(myZombie));
+    require(_isReady(myZombie),"Zombie is not ready to feed");
     _targetDna = _targetDna % dnaModulus;
     uint newDna = (myZombie.dna + _targetDna) / 2;
     if (keccak256(abi.encodePacked(_species)) == keccak256(abi.encodePacked("kitty"))) {
