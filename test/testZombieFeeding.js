@@ -22,7 +22,7 @@ contract('ZombieFeeding', function (accounts) {
     });
 
     // Test that new zombie 'NoName' is created
-    let tx2 = await ZombieFeedingInstance.feedAndMultiply(0,10, "kitty", { 'from': accounts[0] })
+    let tx2 = await ZombieFeedingInstance.feedAndMultiply(zombieId,10, "kitty", { 'from': accounts[0] })
     truffleAssert.eventEmitted(tx2, 'NewZombie', (ev) => {
         newZombieDna=ev.dna.toString();
         return ev.name === "NoName";
@@ -32,6 +32,6 @@ contract('ZombieFeeding', function (accounts) {
     assert.equal(newZombieDna.substr(newZombieDna.length - 2), "99", "dna strain is from a kitty")
  
     // Test that cannot eat again since there is cooldown
-    await truffleAssert.reverts(ZombieFeedingInstance.feedAndMultiply(0,10, "kitty", { 'from': accounts[0] }))
+    await truffleAssert.reverts(ZombieFeedingInstance.feedAndMultiply(zombieId,10, "kitty", { 'from': accounts[0] }))
   })
 })
