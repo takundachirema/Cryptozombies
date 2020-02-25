@@ -4,8 +4,6 @@ const truffleAssert = require('truffle-assertions')
 
 // test starts here
 contract('ZombieFeeding', function (accounts) {
-  let ZombieCreateInstance
-  let Zombie
   // before each test, create a new contract instance
   beforeEach(async function () {
     ZombieFeedingInstance = await ZombieFeeding.new()
