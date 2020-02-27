@@ -39,8 +39,8 @@ contract ZombieFeeding is ZombieFactory {
   }
 
   //public for testing
-  function feedAndMultiply(uint _zombieId, uint _targetDna, string memory _species) public onlyOwnerOf(_zombieId) {
-  //function feedAndMultiply(uint _zombieId, uint _targetDna, string memory _species) private onlyOwnerOf(_zombieId) {
+  //function feedAndMultiply(uint _zombieId, uint _targetDna, string memory _species) public onlyOwnerOf(_zombieId) {
+  function feedAndMultiply(uint _zombieId, uint _targetDna, string memory _species) internal onlyOwnerOf(_zombieId) {
     Zombie storage myZombie = zombies[_zombieId];
     require(_isReady(myZombie),"Zombie is not ready to feed");
     _targetDna = _targetDna % dnaModulus;
